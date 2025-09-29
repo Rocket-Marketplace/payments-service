@@ -48,7 +48,7 @@ export class PaymentsService {
         amount,
         currency: 'BRL',
         paymentMethod,
-        description: savedPayment.description,
+        description: savedPayment.description || undefined,
         buyerId,
       });
 
@@ -60,7 +60,7 @@ export class PaymentsService {
 
       if (gatewayResponse.status === PaymentStatus.FAILED) {
         savedPayment.failedAt = new Date();
-        savedPayment.errorMessage = gatewayResponse.message;
+        savedPayment.errorMessage = gatewayResponse.message || null;
       }
 
       await this.paymentRepository.save(savedPayment);
@@ -130,7 +130,7 @@ export class PaymentsService {
 
     try {
       await this.paymentGatewayService.refundPayment(
-        payment.externalPaymentId,
+        payment.externalPaymentId!,
         refundAmount,
       );
 

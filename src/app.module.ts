@@ -5,6 +5,8 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { databaseConfig } from './config/database.config';
 import { PaymentsModule } from './payments/payments.module';
+import { EventsModule } from './events/events.module';
+import { HealthModule } from './health/health.module';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 
 @Module({
@@ -19,6 +21,8 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
       signOptions: { expiresIn: '24h' },
     }),
     PaymentsModule,
+    EventsModule,
+    HealthModule,
   ],
   providers: [JwtStrategy],
 })
