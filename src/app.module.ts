@@ -7,6 +7,7 @@ import { databaseConfig } from './config/database.config';
 import { PaymentsModule } from './payments/payments.module';
 import { EventsModule } from './events/events.module';
 import { HealthModule } from './health/health.module';
+import { MessagingModule } from './messaging/messaging.module';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 
 @Module({
@@ -23,6 +24,7 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     PaymentsModule,
     EventsModule,
     HealthModule,
+    MessagingModule,
   ],
   providers: [JwtStrategy],
 })
