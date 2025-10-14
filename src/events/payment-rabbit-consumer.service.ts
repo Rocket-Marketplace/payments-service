@@ -21,7 +21,7 @@ export class PaymentRabbitConsumerService implements OnModuleInit {
   private readonly logger = new Logger(PaymentRabbitConsumerService.name);
   private readonly QUEUE_NAME = 'payment_orders_queue';
   private readonly ROUTING_KEY = 'payment.order';
-  private readonly EXCHANGE = 'payments';
+  private readonly EXCHANGE = 'marketplace.events';
 
   constructor(
     private readonly rabbitMQService: RabbitMQService,
