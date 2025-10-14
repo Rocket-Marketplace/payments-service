@@ -5,7 +5,6 @@ import {
   Body,
   Param,
   Patch,
-  UseGuards,
   Request,
 } from '@nestjs/common';
 import {
@@ -13,18 +12,14 @@ import {
   ApiOperation,
   ApiResponse,
   ApiParam,
-  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { PaymentsService } from './payments.service';
 import { ProcessPaymentDto } from '../common/dto/process-payment.dto';
 import { RefundPaymentDto } from '../common/dto/refund-payment.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { PaymentStatus } from './entities/payment.entity';
 
 @ApiTags('Payments')
 @Controller('payments')
-// @UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
 export class PaymentsController {
   constructor(
     private readonly paymentsService: PaymentsService,
