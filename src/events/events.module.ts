@@ -1,12 +1,16 @@
 import { Module, forwardRef } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
-import { MessagingClientService } from './messaging-client.service';
-import { PaymentQueueService } from './payment-queue.service';
+import { PaymentRabbitConsumerService } from './payment-rabbit-consumer.service';
 import { PaymentsModule } from '../payments/payments.module';
+import { PaymentModule } from '../payment/payment.module';
+import { MessagingModule } from '../messaging/messaging.module';
 
 @Module({
-  imports: [HttpModule, forwardRef(() => PaymentsModule)],
-  providers: [MessagingClientService, PaymentQueueService],
-  exports: [PaymentQueueService],
+  imports: [
+    forwardRef(() => PaymentsModule),
+    PaymentModule,
+    MessagingModule,
+  ],
+  providers: [PaymentRabbitConsumerService],
+  exports: [PaymentRabbitConsumerService],
 })
 export class EventsModule {}

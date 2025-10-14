@@ -6,12 +6,11 @@ import { PaymentsController } from './payments.controller';
 import { Payment } from './entities/payment.entity';
 import { PaymentGatewayService } from '../services/payment-gateway.service';
 import { EventsModule } from '../events/events.module';
-import { PaymentConsumerService } from '../events/payment-consumer.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Payment]), HttpModule, forwardRef(() => EventsModule)],
   controllers: [PaymentsController],
-  providers: [PaymentsService, PaymentGatewayService, PaymentConsumerService],
+  providers: [PaymentsService, PaymentGatewayService],
   exports: [PaymentsService],
 })
 export class PaymentsModule {}

@@ -20,7 +20,6 @@ import { ProcessPaymentDto } from '../common/dto/process-payment.dto';
 import { RefundPaymentDto } from '../common/dto/refund-payment.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { PaymentStatus } from './entities/payment.entity';
-import { PaymentConsumerService } from '../events/payment-consumer.service';
 
 @ApiTags('Payments')
 @Controller('payments')
@@ -29,7 +28,6 @@ import { PaymentConsumerService } from '../events/payment-consumer.service';
 export class PaymentsController {
   constructor(
     private readonly paymentsService: PaymentsService,
-    private readonly paymentConsumerService: PaymentConsumerService,
   ) {}
 
   @Post('process')
@@ -50,18 +48,6 @@ export class PaymentsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getPaymentStats() {
     return this.paymentsService.getPaymentStats();
-  }
-
-  @Post('test-consumer')
-  @ApiOperation({ summary: 'Test RabbitMQ consumer' })
-  @ApiResponse({ status: 200, description: 'Consumer test completed' })
-  async testConsumer() {
-    try {
-      await this.paymentConsumerService.startConsuming();
-      return { message: 'Consumer started successfully' };
-    } catch (error) {
-      return { message: 'Failed to start consumer', error: error.message };
-    }
   }
 
   @Get('order/:orderId')
